@@ -1,0 +1,5 @@
+package com.miempresa.banco;
+
+public class CuentaBancaria {
+
+}

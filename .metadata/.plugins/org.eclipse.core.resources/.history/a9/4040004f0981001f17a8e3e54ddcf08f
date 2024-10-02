@@ -1,0 +1,79 @@
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+class Persona {
+    private String nombre;
+    private String apellido;
+    private String documento;
+    private String provincia;
+    private String ciudad;
+
+    public Persona(String nombre, String apellido, String documento, String provincia, String ciudad) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.documento = documento;
+        this.provincia = provincia;
+        this.ciudad = ciudad;
+    }
+
+    // Getters
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public String getDocumento() {
+        return documento;
+    }
+
+    public String getProvincia() {
+        return provincia;
+    }
+
+    public String getCiudad() {
+        return ciudad;
+    }
+}
+
+abstract class CuentaBancaria {
+    protected Persona titular;
+    protected String CBU;
+    protected double saldo;
+
+    public CuentaBancaria(Persona titular) {
+        this.titular = titular;
+        this.CBU = UUID.randomUUID().toString(); // Genera un CBU aleatorio
+        this.saldo = 0;
+    }
+
+    public abstract void depositar(double monto);
+
+    public abstract void retirar(double monto);
+
+    public double getSaldo() {
+        return saldo;
+    }
+
+    public Persona getTitular() {
+        return titular;
+    }
+
+    public String getCBU() {
+        return CBU;
+    }
+
+    public void transferir(CuentaBancaria cuentaDestino, double monto, double tasaCambio) {
+        if (this.saldo >= monto) {
+            this.saldo -= monto;
+            cuentaDestino.depositar(monto * tasaCambio);
+            System.out.println("Transferencia realizada.");
+        } else {
+            System.out.println("Saldo insuficiente para la transferencia.");
+        }
+    }
+}

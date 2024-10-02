@@ -1,0 +1,27 @@
+package com.miempresa.banco;
+
+public class Main {
+    public static void main(String[] args) {
+        // Crear banco y cuentas
+        Banco banco = new Banco();
+
+        // Crear personas
+        Persona persona1 = new Persona("Juan", "Perez", "12345678", "Buenos Aires", "CABA");
+        Persona persona2 = new Persona("Maria", "Gomez", "87654321", "Cordoba", "Cordoba");
+
+        // Crear cuentas en pesos y dólares
+        CuentaPesos cuentaPesos1 = new CuentaPesos(persona1);
+        CuentaDolares cuentaDolares1 = new CuentaDolares(persona2);
+
+        // Agregar cuentas al banco
+        banco.agregarCuenta(cuentaPesos1);
+        banco.agregarCuenta(cuentaDolares1);
+
+        // Operaciones
+        cuentaPesos1.depositar(1000);
+        cuentaDolares1.depositar(100);
+
+        // Buscar cuentas por ciudad
+        banco.buscarCuentasPorCiudad("CABA");
+    }
+}

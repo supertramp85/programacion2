@@ -1,0 +1,58 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+public class Main {
+    public static void main(String[] args) {
+        // Crear banco
+        Banco banco = new Banco();
+
+        // Crear personas
+        Persona persona1 = new Persona("Juan", "Perez", "12345678", "Buenos Aires", "CABA");
+        Persona persona2 = new Persona("Maria", "Gomez", "87654321", "Cordoba", "Cordoba");
+        Persona persona3 = new Persona("Carlos", "Lopez", "56781234", "Buenos Aires", "La Plata");
+
+        // Crear cuentas en pesos
+        CuentaPesos cuentaPesos1 = new CuentaPesos(persona1);
+        CuentaPesos cuentaPesos2 = new CuentaPesos(persona2);
+        CuentaPesos cuentaPesos3 = new CuentaPesos(persona3);
+
+        // Crear cuentas en dólares
+        CuentaDolares cuentaDolares1 = new CuentaDolares(persona1);
+        CuentaDolares cuentaDolares2 = new CuentaDolares(persona2);
+
+        // Agregar cuentas al banco
+        banco.agregarCuenta(cuentaPesos1);
+        banco.agregarCuenta(cuentaPesos2);
+        banco.agregarCuenta(cuentaPesos3);
+        banco.agregarCuenta(cuentaDolares1);
+        banco.agregarCuenta(cuentaDolares2);
+
+        // Depositar en cuentas en pesos
+        banco.depositarEnCuentasPesos(1000);
+
+        // Depositar en cuentas en dólares
+        banco.depositarEnCuentasDolares(100);
+
+        // Retirar de una cuenta en pesos
+        cuentaPesos1.retirar(400);
+
+        // Retirar de una cuenta en dólares
+        cuentaDolares1.retirar(50);
+
+        // Depositar 20 dólares en una cuenta en dólares
+        cuentaDolares2.depositar(20);
+
+        // Intentar retirar 5000 pesos de una cuenta en pesos
+        cuentaPesos2.retirar(5000);
+
+        // Transferir dinero de una cuenta en dólares a una cuenta en pesos
+        cuentaDolares2.transferir(cuentaPesos1, 50, 350); // Ejemplo de tasa de cambio 1 USD = 350 ARS
+
+        // Buscar cuentas por provincia
+        banco.buscarCuentasPorProvincia("Buenos Aires");
+
+        // Buscar cuentas por ciudad
+        banco.buscarCuentasPorCiudad("CABA");
+    }
+}

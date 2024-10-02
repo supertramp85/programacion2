@@ -1,0 +1,39 @@
+package com.miempresa.banco;
+
+import java.util.UUID;
+
+public abstract class CuentaBancaria {
+    protected Persona titular;
+    protected String CBU;
+    protected double saldo;
+
+    public CuentaBancaria(Persona titular) {
+        this.titular = titular;
+        this.CBU = UUID.randomUUID().toString();
+        this.saldo = 0;
+    }
+
+    public abstract void depositar(double monto);
+
+    public abstract void retirar(double monto);
+
+    public double getSaldo() {
+        return saldo;
+    }
+
+    // Método para obtener el titular de la cuenta
+    public Persona getTitular() {
+        return titular;
+    }
+
+    // Método para transferir dinero entre cuentas
+    public void transferir(CuentaBancaria cuentaDestino, double monto, double tasaCambio) {
+        if (saldo >= monto) {
+            saldo -= monto;
+            cuentaDestino.depositar(monto * tasaCambio);
+        } else {
+            System.out.println("Saldo insuficiente");
+        }
+    }
+}
+
